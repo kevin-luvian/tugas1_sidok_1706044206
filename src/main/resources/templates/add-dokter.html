@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymleaf.org">
+
+<head>
+    <title>Add Store</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <h2 th:text="'Dokter ' + ${dokter.nama} + ' dengan NIP '+ ${dokter.nip} +' berhasil ditambahkan'"></h2>
+</body>
+
+</html>

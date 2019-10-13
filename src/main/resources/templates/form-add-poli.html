@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymlaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Store</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+
+    <h3>Tambah Poli</h3>
+
+    <form th:action="@{/poli/tambah}" th:object="${poli}" method="POST">
+        Nama: <br>
+        <input type="text" name="nama"/>
+        <br>
+
+        Location: <br>
+        <input type="text" name="location"/>
+        <br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
