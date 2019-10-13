@@ -2,19 +2,15 @@ package apap.tugas.sidok.model.base;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.math.BigInteger;
 
 @Entity
 @Table
-public class SpecializationModel {
-
+public class SpesialisasiModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigInteger id;
+    private Long id;
 
     @NotNull
-    @Size(max = 30)
     @Column(name="nama", nullable = false)
     private String nama;
 
@@ -22,11 +18,11 @@ public class SpecializationModel {
     @Column(name="gelar", nullable = false)
     private String gelar;
 
-    public BigInteger getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,38 +1,29 @@
 package apap.tugas.sidok.model.base;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.math.BigInteger;
+import org.springframework.format.annotation.DateTimeFormat;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-
-import org.hibernate.validator.constraints.UniqueElements;
+import java.util.Random;
+import java.util.TimeZone;
 
 @Entity
 @Table
-public class DoctorModel {
-
+public class DokterModel {
     @Id
-    @Size(min = 20, max = 20)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigInteger id;
+    private Long id;
 
     @NotNull
-    @UniqueElements
-    @Size(min = 13, max = 13)
-    @Column(name = "NIP", nullable = false)
-    private String NIP;
+    @Column(name = "nip", nullable = false)
+    private String nip;
 
     @NotNull
-    @Size(min = 13, max = 13)
-    @Column(name = "NIK", nullable = false)
-    private String NIK;
+    @Column(name = "nik", nullable = false)
+    private String nik;
 
     @NotNull
-    @Size(max = 30)
     @Column(name="nama", nullable = false)
     private String nama;
 
@@ -41,35 +32,36 @@ public class DoctorModel {
     private int jenisKelamin;
 
     @NotNull
-    @Column(name = "tanggal_lahir", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "tanggal_lahir", nullable = false, columnDefinition = "DATE")
     private Date tanggalLahir;
 
     @NotNull
     @Column(name = "tempat_lahir", nullable = false)
     private String tempatLahir;
 
-    public BigInteger getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getNIP() {
-        return NIP;
+    public String getNip() {
+        return nip;
     }
 
-    public void setNIP(String NIP) {
-        this.NIP = NIP;
+    public void setNip(String nip) {
+        this.nip = nip;
     }
 
-    public String getNIK() {
-        return NIK;
+    public String getNik() {
+        return nik;
     }
 
-    public void setNIK(String NIK) {
-        this.NIK = NIK;
+    public void setNik(String nik) {
+        this.nik = nik;
     }
 
     public String getNama() {
@@ -102,5 +94,24 @@ public class DoctorModel {
 
     public void setTempatLahir(String tempatLahir) {
         this.tempatLahir = tempatLahir;
+    }
+
+    public String createNIP(){
+        Random rnd = new Random();
+        String NIP = (Calendar.getInstance().get(Calendar.YEAR) + 5) +"";
+        NIP += getStringTanggalLahir();
+        NIP += getJenisKelamin();
+        NIP += (char) (rnd.nextInt(26)+65);
+        NIP += (char) (rnd.nextInt(26)+65);
+        return NIP;
+    }
+
+    private String getStringTanggalLahir(){
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Jakarta"));
+        cal.setTime(getTanggalLahir());
+        String year = String.format("%02d", cal.get(Calendar.YEAR)%100);
+        String month = String.format("%02d", cal.get(Calendar.MONTH));
+        String day = String.format("%02d",cal.get(Calendar.DAY_OF_MONTH));
+        return day+month+year;
     }
 }

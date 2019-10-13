@@ -2,31 +2,27 @@ package apap.tugas.sidok.model.base;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.math.BigInteger;
 
 @Entity
 @Table
 public class PoliModel {
     @Id
-    @Size(min = 20, max = 20)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigInteger id;
+    private Long id;
 
     @NotNull
-    @Size(max = 30)
     @Column(name="nama", nullable = false)
     private String nama;
 
     @NotNull
     @Column(name = "location", nullable = false)
-    private int location;
+    private String location;
 
-    public BigInteger getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -38,11 +34,11 @@ public class PoliModel {
         this.nama = nama;
     }
 
-    public int getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(int location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 }
