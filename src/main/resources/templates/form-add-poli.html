@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymlaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Store</title>
+    <title>Add Poli</title>
 
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
@@ -11,18 +11,25 @@
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
 
-    <h3>Tambah Poli</h3>
+    <div class="container">
+        <br/>
+        <h3>Tambah Poli</h3>
+        <br/>
 
-    <form th:action="@{/poli/tambah}" th:object="${poli}" method="POST">
-        Nama: <br>
-        <input type="text" name="nama"/>
-        <br>
+        <form th:action="@{/poli/tambah}" th:object="${poli}" method="POST">
+            <div class="form-group">
+                <label>Nama</label>
+                <input type="text" class="form-control" placeholder="Nama Poli" name="nama">
+            </div>
 
-        Location: <br>
-        <input type="text" name="location"/>
-        <br>
+            <div class="form-group">
+                <label>Lokasi</label>
+                <input type="text" class="form-control" placeholder="Location" name="location">
+            </div>
 
-        <button type="submit">Submit</button>
-    </form>
+            <button class="btn btn-dark" type="submit">Submit</button>
+        </form>
+    </div>
+
 </body>
 </html>

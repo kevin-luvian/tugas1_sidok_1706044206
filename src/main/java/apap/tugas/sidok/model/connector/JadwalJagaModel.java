@@ -8,8 +8,6 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.math.BigInteger;
 
 @Entity
 @Table
@@ -33,4 +31,36 @@ public class JadwalJagaModel {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private DokterModel dokterModel;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public PoliModel getPoliModel() {
+        return poliModel;
+    }
+
+    public void setPoliModel(PoliModel poliModel) {
+        this.poliModel = poliModel;
+    }
+
+    public DokterModel getDokterModel() {
+        return dokterModel;
+    }
+
+    public void setDokterModel(DokterModel dokterModel) {
+        this.dokterModel = dokterModel;
+    }
 }

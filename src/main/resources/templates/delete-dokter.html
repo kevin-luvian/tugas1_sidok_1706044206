@@ -2,7 +2,7 @@
 <html xmlns:th="http://thymleaf.org">
 
 <head>
-    <title>Add Dokter</title>
+    <title>Delete Dokter</title>
 
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
@@ -10,7 +10,7 @@
 
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
-    <h2 th:text="'Dokter ' + ${dokter.nama} + ' dengan NIP '+ ${dokter.nip} +' berhasil ditambahkan'"></h2>
+    <h2 th:text="'Dokter ' + ${dokter.nama} + ' dengan NIP '+ ${dokter.nip} +' berhasil dihapus'"></h2>
 </body>
 
 </html>

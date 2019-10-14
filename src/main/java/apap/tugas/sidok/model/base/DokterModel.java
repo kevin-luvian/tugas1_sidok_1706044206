@@ -76,6 +76,11 @@ public class DokterModel {
         return jenisKelamin;
     }
 
+    public String toStringJenisKelamin() {
+        if(getJenisKelamin() == 1) return "laki-laki";
+        return "perempuan";
+    }
+
     public void setJenisKelamin(int jenisKelamin) {
         this.jenisKelamin = jenisKelamin;
     }
@@ -86,6 +91,16 @@ public class DokterModel {
 
     public void setTanggalLahir(Date tanggalLahir) {
         this.tanggalLahir = tanggalLahir;
+    }
+
+    public String toStringTanggalLahir() {
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Jakarta"));
+        cal.setTime(getTanggalLahir());
+        String year = String.format("%04d", cal.get(Calendar.YEAR));
+        String month = String.format("%02d", cal.get(Calendar.MONTH)+1);
+        String day = String.format("%02d",cal.get(Calendar.DAY_OF_MONTH));
+        
+        return year+"-"+month+"-"+day;
     }
 
     public String getTempatLahir() {
@@ -110,7 +125,7 @@ public class DokterModel {
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Jakarta"));
         cal.setTime(getTanggalLahir());
         String year = String.format("%02d", cal.get(Calendar.YEAR)%100);
-        String month = String.format("%02d", cal.get(Calendar.MONTH));
+        String month = String.format("%02d", cal.get(Calendar.MONTH)+1);
         String day = String.format("%02d",cal.get(Calendar.DAY_OF_MONTH));
         return day+month+year;
     }

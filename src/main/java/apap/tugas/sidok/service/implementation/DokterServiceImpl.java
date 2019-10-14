@@ -6,7 +6,10 @@ import apap.tugas.sidok.service.DokterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -14,9 +17,22 @@ public class DokterServiceImpl implements DokterService {
     @Autowired
     DokterDb dokterDb;
 
+    public static Map parseDokterModel(DokterModel dokter) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("nama", dokter.getNama());
+        map.put("id", dokter.getId()+"");
+        map.put("nip", dokter.getNip());
+        map.put("nik", dokter.getNik());
+        map.put("tempatLahir", dokter.getTempatLahir());
+        map.put("tanggalLahir", dokter.toStringTanggalLahir());
+        map.put("jenisKelamin", dokter.toStringJenisKelamin());
+        return map;
+    }
+
     @Override
     public void createDokterNIP(DokterModel dokter) {
         String NIP = dokter.getNip();
+        System.out.println(getDokterByNIP(NIP).getNip());
         while (getDokterByNIP(NIP) != (null) || NIP.equals("none")){
             NIP = dokter.createNIP();
         }
@@ -59,7 +75,10 @@ public class DokterServiceImpl implements DokterService {
         DokterModel targetDokter = getDokterById(dokter.getId());
         targetDokter.setNama(dokter.getNama());
         targetDokter.setTempatLahir(dokter.getTempatLahir());
-        dokterDb.save(targetDokter);
+        targetDokter.setTanggalLahir(dokter.getTanggalLahir());
+        targetDokter.setNik(dokter.getNik());
+        targetDokter.setJenisKelamin(dokter.getJenisKelamin());
+        addDokter(targetDokter);
         return targetDokter;
     }
 }

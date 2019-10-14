@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>View All Poli</title>
 
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
@@ -21,7 +21,7 @@
         <div class="container">
             <div class="card">
                 <div class="card-header text-white bg-dark">
-                    Daftar Dokter
+                    Daftar Poli
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -29,23 +29,18 @@
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Nama</th>
-                                <th scope="col">NIP</th>
-                                <th scope="col">NIK</th>
-                                <th scope="col">Jenis Kelamin</th>
+                                <th scope="col">Lokasi</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="dokter, iter : ${dokterList}">
+                            <tr th:each="poli, iter : ${poliList}">
                                 <th scope="row" th:text="${iter.index}+1"></th>
-                                <td><a th:href="@{/dokter/?nikDokter=} + ${dokter.nik}" th:text="${dokter.nama}"></a></td>
-                                <td th:text="${dokter.nip}"></td>
-                                <td th:text="${dokter.nik}"></td>
-                                <td th:text="${dokter.jenisKelamin}"></td>
+                                <td><a href="#" th:text="${poli.nama}"></a></td>
+                                <td th:text="${poli.location}"></td>
                                 <td>
-                                    <a class="btn btn-primary" th:href="@{/jadwal/tambah/} + ${dokter.nip}" role="button">tambah jadwal</a>
-                                    <a class="btn btn-success" th:href="@{/dokter/update/} + ${dokter.id}" role="button">ubah</a>
-                                    <a class="btn btn-danger" th:href="@{/dokter/delete/} + ${dokter.id}" role="button">hapus</a>
+                                    <a class="btn btn-success" href="#" role="button">ubah</a>
+                                    <a class="btn btn-danger" href="#" role="button">hapus</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -53,7 +48,7 @@
                 </div>
 
                 <div class="container px-3">
-                    <a class="btn btn-dark m-3 float-right" th:href="@{/dokter/tambah}" role="button">Tambah Dokter</a>
+                    <a class="btn btn-dark m-3 float-right" th:href="@{/poli/tambah}" role="button">Tambah Poli</a>
                 </div>
             </div>
         </div>
