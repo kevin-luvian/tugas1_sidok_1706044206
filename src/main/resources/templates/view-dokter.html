@@ -27,8 +27,8 @@
                 <p th:text="'Jenis Kelamin: ' + ${dokter.jenisKelamin}"></p>
 
                 <div>
-                    <a class="btn btn-success" href="#" role="button">ubah</a>
-                    <a class="btn btn-danger" href="#" role="button">hapus</a>
+                    <a class="btn btn-success" th:href="@{/dokter/update/} + ${dokter.id}" role="button">ubah</a>
+                    <a class="btn btn-danger" th:href="@{/dokter/delete/} + ${dokter.id}" role="button">hapus</a>
                 </div>
             </div>
         </div>

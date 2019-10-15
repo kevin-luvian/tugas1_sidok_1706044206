@@ -3,6 +3,8 @@ package apap.tugas.sidok.controller;
 import apap.tugas.sidok.model.base.DokterModel;
 import apap.tugas.sidok.model.connector.JadwalJagaModel;
 
+import java.util.Arrays;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,16 +15,7 @@ import apap.tugas.sidok.service.DokterService;
 import apap.tugas.sidok.service.JadwalJagaService;
 import apap.tugas.sidok.service.PoliService;
 import apap.tugas.sidok.service.implementation.DokterServiceImpl;
-import apap.tugas.sidok.service.implementation.PoliServiceImpl;
-
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class JadwalJagaController {

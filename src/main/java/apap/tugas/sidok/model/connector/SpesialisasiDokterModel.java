@@ -5,10 +5,7 @@ import apap.tugas.sidok.model.base.SpesialisasiModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
-import javax.validation.constraints.Size;
-import java.math.BigInteger;
 
 @Entity
 @Table

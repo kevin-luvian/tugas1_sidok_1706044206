@@ -1,6 +1,7 @@
 package apap.tugas.sidok.service.implementation;
 
 import apap.tugas.sidok.model.base.DokterModel;
+import apap.tugas.sidok.model.base.PoliModel;
 import apap.tugas.sidok.model.connector.JadwalJagaModel;
 import apap.tugas.sidok.repository.JadwalJagaDb;
 import apap.tugas.sidok.service.JadwalJagaService;
@@ -23,7 +24,6 @@ public class JadwalJagaServiceImpl implements JadwalJagaService {
     @Override
     public void deleteJadwalJaga(JadwalJagaModel jadwalJagaModel) {
         jadwalJagaDb.delete(jadwalJagaModel);
-
     }
 
     @Override
@@ -34,5 +34,10 @@ public class JadwalJagaServiceImpl implements JadwalJagaService {
     @Override
     public List<JadwalJagaModel> getByDokter(DokterModel dokter) {
         return jadwalJagaDb.findByDokterModel(dokter);
+    }
+
+    @Override
+    public List<JadwalJagaModel> getByPoli(PoliModel poli) {
+        return jadwalJagaDb.findByPoliModel(poli);
     }
 }

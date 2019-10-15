@@ -6,7 +6,6 @@ import apap.tugas.sidok.service.DokterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,6 @@ public class DokterServiceImpl implements DokterService {
     @Override
     public void createDokterNIP(DokterModel dokter) {
         String NIP = dokter.getNip();
-        System.out.println(getDokterByNIP(NIP).getNip());
         while (getDokterByNIP(NIP) != (null) || NIP.equals("none")){
             NIP = dokter.createNIP();
         }

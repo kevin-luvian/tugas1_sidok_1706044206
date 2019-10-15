@@ -1,7 +1,6 @@
 package apap.tugas.sidok.service;
 
 import apap.tugas.sidok.model.base.SpesialisasiModel;
-import java.math.BigInteger;
 
 public interface SpesialisasiService {
     void addSpesialisasi(SpesialisasiModel spesialisasiModel);

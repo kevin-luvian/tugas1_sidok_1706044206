@@ -1,6 +1,8 @@
 package apap.tugas.sidok.controller;
 
 import apap.tugas.sidok.model.base.PoliModel;
+import apap.tugas.sidok.model.connector.JadwalJagaModel;
+import apap.tugas.sidok.service.JadwalJagaService;
 import apap.tugas.sidok.service.PoliService;
 
 import java.util.List;
@@ -17,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class PoliController {
     @Autowired
     private PoliService poliService;
+
+    @Autowired
+    private JadwalJagaService jadwalJagaService;
 
     @RequestMapping(value = "/poli", method = RequestMethod.GET)
     private String home(Model model) {
@@ -37,5 +42,16 @@ public class PoliController {
         poliService.addPoli(poli);
         model.addAttribute("poli", poli);
         return "add-poli";
+    }
+
+    @RequestMapping(value="/poli/dokter/{idPoli}", method = RequestMethod.GET)
+    public String viewPoliByDokterPage(
+            @PathVariable Long idPoli,
+            Model model
+    ) {
+        PoliModel poli = poliService.getPoliById(idPoli);
+        List<JadwalJagaModel> jadwalJagaPoli = jadwalJagaService.getByPoli(poli);
+        model.addAttribute("jadwalJagaList", jadwalJagaPoli);
+        return "view-dokter-by-poli";
     }
 }
