@@ -48,7 +48,21 @@
                 </select>
             </div>
 
-            <button class="btn btn-dark" type="submit">Submit</button>
+            <div class="form-group">
+                <label>Spesialisasi</label>
+                <div th:field="*{listSpesialisasiDokter}" th:each="spesialisasiDokterModel, iterationStatus : *{listSpesialisasiDokter}">
+                    <select class="form-control" th:field="*{listSpesialisasiDokter[__${iterationStatus.index}__].spesialisasiModel}">
+                        <option disabled selected value="">-- Pilih Spesialisasi --</option>
+                        <option 
+                            th:each="spesialisasi : ${spesialisasiList}" 
+                            th:value="${spesialisasi.id}" 
+                            th:text="${spesialisasi.nama}">
+                        </option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-dark" name="addRow">Add Row</button>
+            </div>
+            <button class="btn btn-dark" type="submit" name="submit">Submit</button>
         </form>
     </div>
 

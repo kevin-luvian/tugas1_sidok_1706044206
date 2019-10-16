@@ -25,6 +25,10 @@
                 <p th:text="'Tempat Lahir: ' + ${dokter.tempatLahir}"></p>
                 <p th:text="'Tanggal Lahir: ' + ${dokter.tanggalLahir}"></p>
                 <p th:text="'Jenis Kelamin: ' + ${dokter.jenisKelamin}"></p>
+                <p>Spesialisasi</p>
+                <ul th:each="spesialisasiDokter, iter : ${listSpesialisasiDokter}">
+                    <li th:text="${spesialisasiDokter.spesialisasiModel.nama}"></li>
+                </ul>
 
                 <div>
                     <a class="btn btn-success" th:href="@{/dokter/update/} + ${dokter.id}" role="button">ubah</a>

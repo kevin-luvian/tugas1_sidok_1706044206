@@ -33,10 +33,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="jadwalJaga, iter : ${jadwalJagaList}">
+                            <tr th:each="dokter, iter : ${dokterModels}">
                                 <th scope="row" th:text="${iter.index}+1"></th>
-                                <td th:text="${jadwalJaga.dokterModel.nama}"></td>
-                                <td th:text="${jadwalJaga.dokterModel.tempatLahir}"></td>
+                                <td th:text="${dokter.nama}"></td>
+                                <td th:text="${dokter.listSpesialisasiDokter}"></td>
                             </tr>
                         </tbody>
                     </table>

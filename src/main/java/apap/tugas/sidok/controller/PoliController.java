@@ -1,11 +1,15 @@
 package apap.tugas.sidok.controller;
 
+import apap.tugas.sidok.model.base.DokterModel;
 import apap.tugas.sidok.model.base.PoliModel;
 import apap.tugas.sidok.model.connector.JadwalJagaModel;
 import apap.tugas.sidok.service.JadwalJagaService;
 import apap.tugas.sidok.service.PoliService;
+import apap.tugas.sidok.service.implementation.DokterServiceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,7 +55,45 @@ public class PoliController {
     ) {
         PoliModel poli = poliService.getPoliById(idPoli);
         List<JadwalJagaModel> jadwalJagaPoli = jadwalJagaService.getByPoli(poli);
-        model.addAttribute("jadwalJagaList", jadwalJagaPoli);
+        List<Map> dokterModels = new ArrayList<>();
+        for(JadwalJagaModel i : jadwalJagaPoli){
+            dokterModels.add(DokterServiceImpl.parseDokterModel(i.getDokterModel()));
+        }
+        model.addAttribute("dokterModels", dokterModels);
         return "view-dokter-by-poli";
+    }
+
+    @RequestMapping(value="poli/update/{poliId}", method = RequestMethod.GET)
+    public String updateDokterFormPage(
+            @PathVariable Long poliId,
+            Model model
+    ) {
+        PoliModel targetPoli = poliService.getPoliById(poliId);
+        model.addAttribute("poli", targetPoli);
+        return "form-update-poli";
+    }
+
+    //API yg digunakan utk submit form change store
+    @RequestMapping(value="poli/update/{poliId}", method=RequestMethod.POST)
+    public String updatePoliFormSubmit(
+        @PathVariable Long poliId,
+        @ModelAttribute PoliModel poli,
+        Model model
+    ) {
+        poli.setId(poliId);
+        PoliModel updatedPoli = poliService.changePoli(poli);
+        model.addAttribute("poli", updatedPoli);
+        return "update-poli";
+    }
+    
+    @RequestMapping(value="poli/delete/{poliId}", method = RequestMethod.GET)
+    public String deletePoli(
+            @PathVariable Long poliId,
+            Model model
+    ) {
+        PoliModel existingPoli = poliService.getPoliById(poliId);
+        model.addAttribute("poli", existingPoli);
+        poliService.deletePoli(existingPoli);
+        return "delete-poli";
     }
 }

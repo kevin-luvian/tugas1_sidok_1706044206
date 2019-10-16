@@ -14,15 +14,39 @@ public class SpesialisasiDokterModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.EAGER, optional = true)
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "id_spesialisasi", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private SpesialisasiModel spesialisasiModel;
 
-    @OneToOne(fetch = FetchType.EAGER, optional = true)
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "id_dokter", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private DokterModel dokterModel;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public SpesialisasiModel getSpesialisasiModel() {
+        return spesialisasiModel;
+    }
+
+    public void setSpesialisasiModel(SpesialisasiModel spesialisasiModel) {
+        this.spesialisasiModel = spesialisasiModel;
+    }
+
+    public DokterModel getDokterModel() {
+        return dokterModel;
+    }
+
+    public void setDokterModel(DokterModel dokterModel) {
+        this.dokterModel = dokterModel;
+    }
 }

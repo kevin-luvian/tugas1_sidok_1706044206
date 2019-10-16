@@ -12,13 +12,13 @@
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
 
-    <div class="container-fluid">
+    <div class="container-fluid py-5">
         <br/>
         <div class="text-center">
             <h1>Sistem Informasi Dokter</h1>
         </div>
 
-        <div class="container">
+        <div class="container col-10">
             <div class="card">
                 <div class="card-header text-white bg-dark">
                     Daftar Dokter
@@ -32,6 +32,7 @@
                                 <th scope="col">NIP</th>
                                 <th scope="col">NIK</th>
                                 <th scope="col">Jenis Kelamin</th>
+                                <th scope="col">Spesialisasi</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -42,6 +43,7 @@
                                 <td th:text="${dokter.nip}"></td>
                                 <td th:text="${dokter.nik}"></td>
                                 <td th:text="${dokter.jenisKelamin}"></td>
+                                <td th:text="${dokter.listSpesialisasiDokter}"></td>
                                 <td>
                                     <a class="btn btn-primary" th:href="@{/jadwal/tambah/} + ${dokter.nip}" role="button">tambah jadwal</a>
                                     <a class="btn btn-success" th:href="@{/dokter/update/} + ${dokter.id}" role="button">ubah</a>
@@ -51,10 +53,8 @@
                         </tbody>
                     </table>
                 </div>
-
-                <div class="container px-3">
-                    <a class="btn btn-dark m-3 float-right" th:href="@{/dokter/tambah}" role="button">Tambah Dokter</a>
-                </div>
+                
+                <a class="btn btn-dark m-3 float-right" th:href="@{/dokter/tambah}" role="button">Tambah Dokter</a>
             </div>
         </div>
     </div>

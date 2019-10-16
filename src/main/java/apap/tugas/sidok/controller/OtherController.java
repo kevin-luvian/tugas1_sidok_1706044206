@@ -1,7 +1,10 @@
 package apap.tugas.sidok.controller;
 
 import apap.tugas.sidok.model.base.DokterModel;
+import apap.tugas.sidok.model.base.PoliModel;
+import apap.tugas.sidok.model.base.SpesialisasiModel;
 import apap.tugas.sidok.model.connector.JadwalJagaModel;
+import apap.tugas.sidok.model.connector.SpesialisasiDokterModel;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,11 +17,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import apap.tugas.sidok.service.DokterService;
 import apap.tugas.sidok.service.JadwalJagaService;
 import apap.tugas.sidok.service.PoliService;
+import apap.tugas.sidok.service.SpesialisasiDokterService;
+import apap.tugas.sidok.service.SpesialisasiService;
 import apap.tugas.sidok.service.implementation.DokterServiceImpl;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class JadwalJagaController {
+public class OtherController {
+    @Autowired
+    private SpesialisasiDokterService spesialisasiDokterService;
+
     @Autowired
     private JadwalJagaService jadwalJagaService;
 
@@ -27,6 +36,9 @@ public class JadwalJagaController {
 
     @Autowired
     private PoliService poliService;
+
+    @Autowired
+    private SpesialisasiService spesialisasiService;
 
     @RequestMapping(value="/jadwal/tambah/{nipDokter}", method = RequestMethod.GET)
     public String addJadwalJagaDokterPage(
@@ -52,8 +64,30 @@ public class JadwalJagaController {
         @ModelAttribute JadwalJagaModel jadwalJaga,
         Model model
     ) {
+        DokterModel dokter = dokterService.getDokterByNIP(nipDokter);
+        dokter.addJadwalJaga(jadwalJaga);
+
+        PoliModel poli = poliService.getPoliById(jadwalJaga.getPoliModel().getId());
+        poli.addJadwalJaga(jadwalJaga);
+
         jadwalJagaService.addJadwalJaga(jadwalJaga);
         model.addAttribute("jadwalJaga", jadwalJaga);
         return "add-jadwal-jaga";
+    }
+
+    @RequestMapping(value="/cari", method=RequestMethod.GET)
+    public String viewByNIK(
+            @RequestParam(value = "idSpesialisasi") String idSpesialisasi,
+            @RequestParam(value = "idPoli") String idPoli,
+            Model model ) {
+        //mengambil obj berdasarkan id
+        SpesialisasiModel spesialisasi = spesialisasiService.getSpesialisasiById(Long.valueOf(idSpesialisasi));
+        List<SpesialisasiDokterModel> spesialisasiList = spesialisasiDokterService.getBySpesialisasi(spesialisasi);
+        //add obj utk di render
+        PoliModel poli = poliService.getPoliById(Long.valueOf(idPoli));
+        List<JadwalJagaModel> jadwalJagaList = jadwalJagaService.getByPoli(poli);
+        //return template
+        
+        return "view-dokter";
     }
 }

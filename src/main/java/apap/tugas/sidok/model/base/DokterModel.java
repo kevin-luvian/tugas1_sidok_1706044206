@@ -2,9 +2,18 @@ package apap.tugas.sidok.model.base;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.springframework.format.annotation.DateTimeFormat;
+
+import apap.tugas.sidok.model.connector.JadwalJagaModel;
+import apap.tugas.sidok.model.connector.SpesialisasiDokterModel;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.TimeZone;
 
@@ -16,11 +25,11 @@ public class DokterModel {
     private Long id;
 
     @NotNull
-    @Column(name = "nip", nullable = false)
+    @Column(name = "nip", nullable = false, unique = true)
     private String nip;
 
     @NotNull
-    @Column(name = "nik", nullable = false)
+    @Column(name = "nik", nullable = false, unique = true)
     private String nik;
 
     @NotNull
@@ -39,6 +48,60 @@ public class DokterModel {
     @NotNull
     @Column(name = "tempat_lahir", nullable = false)
     private String tempatLahir;
+
+    @OneToMany(mappedBy = "dokterModel", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<JadwalJagaModel> listJadwalJaga;
+
+    @OneToMany(mappedBy = "dokterModel", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<SpesialisasiDokterModel> listSpesialisasiDokter;
+
+    public String toStringListSpesialisasiDokter(){
+        String output = "";
+        for(SpesialisasiDokterModel sdm : getListSpesialisasiDokter()){
+            output += sdm.getSpesialisasiModel().getNama();
+            output += "; ";
+        }
+        return output;
+    }
+
+    public void addJadwalJaga(JadwalJagaModel jadwalJaga){
+        if(listJadwalJaga == null) setListJadwalJaga(new ArrayList<>());
+        listJadwalJaga.add(jadwalJaga);
+    }
+
+    public String toStringJenisKelamin() {
+        if(getJenisKelamin() == 1) return "laki-laki";
+        return "perempuan";
+    }
+
+    public String toStringTanggalLahir() {
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Jakarta"));
+        cal.setTime(getTanggalLahir());
+        String year = String.format("%04d", cal.get(Calendar.YEAR));
+        String month = String.format("%02d", cal.get(Calendar.MONTH)+1);
+        String day = String.format("%02d",cal.get(Calendar.DAY_OF_MONTH));
+        
+        return year+"-"+month+"-"+day;
+    }
+
+    public String createNIP(){
+        Random rnd = new Random();
+        String NIP = (Calendar.getInstance().get(Calendar.YEAR) + 5) +"";
+        NIP += getStringTanggalLahir();
+        NIP += getJenisKelamin();
+        NIP += (char) (rnd.nextInt(26)+65);
+        NIP += (char) (rnd.nextInt(26)+65);
+        return NIP;
+    }
+
+    private String getStringTanggalLahir(){
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Jakarta"));
+        cal.setTime(getTanggalLahir());
+        String year = String.format("%02d", cal.get(Calendar.YEAR)%100);
+        String month = String.format("%02d", cal.get(Calendar.MONTH)+1);
+        String day = String.format("%02d",cal.get(Calendar.DAY_OF_MONTH));
+        return day+month+year;
+    }
 
     public Long getId() {
         return id;
@@ -76,11 +139,6 @@ public class DokterModel {
         return jenisKelamin;
     }
 
-    public String toStringJenisKelamin() {
-        if(getJenisKelamin() == 1) return "laki-laki";
-        return "perempuan";
-    }
-
     public void setJenisKelamin(int jenisKelamin) {
         this.jenisKelamin = jenisKelamin;
     }
@@ -93,16 +151,6 @@ public class DokterModel {
         this.tanggalLahir = tanggalLahir;
     }
 
-    public String toStringTanggalLahir() {
-        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Jakarta"));
-        cal.setTime(getTanggalLahir());
-        String year = String.format("%04d", cal.get(Calendar.YEAR));
-        String month = String.format("%02d", cal.get(Calendar.MONTH)+1);
-        String day = String.format("%02d",cal.get(Calendar.DAY_OF_MONTH));
-        
-        return year+"-"+month+"-"+day;
-    }
-
     public String getTempatLahir() {
         return tempatLahir;
     }
@@ -111,22 +159,19 @@ public class DokterModel {
         this.tempatLahir = tempatLahir;
     }
 
-    public String createNIP(){
-        Random rnd = new Random();
-        String NIP = (Calendar.getInstance().get(Calendar.YEAR) + 5) +"";
-        NIP += getStringTanggalLahir();
-        NIP += getJenisKelamin();
-        NIP += (char) (rnd.nextInt(26)+65);
-        NIP += (char) (rnd.nextInt(26)+65);
-        return NIP;
+    public List<JadwalJagaModel> getListJadwalJaga() {
+        return listJadwalJaga;
     }
 
-    private String getStringTanggalLahir(){
-        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Jakarta"));
-        cal.setTime(getTanggalLahir());
-        String year = String.format("%02d", cal.get(Calendar.YEAR)%100);
-        String month = String.format("%02d", cal.get(Calendar.MONTH)+1);
-        String day = String.format("%02d",cal.get(Calendar.DAY_OF_MONTH));
-        return day+month+year;
+    public void setListJadwalJaga(List<JadwalJagaModel> listJadwalJaga) {
+        this.listJadwalJaga = listJadwalJaga;
+    }
+
+    public List<SpesialisasiDokterModel> getListSpesialisasiDokter() {
+        return listSpesialisasiDokter;
+    }
+
+    public void setListSpesialisasiDokter(List<SpesialisasiDokterModel> listSpesialisasiDokter) {
+        this.listSpesialisasiDokter = listSpesialisasiDokter;
     }
 }

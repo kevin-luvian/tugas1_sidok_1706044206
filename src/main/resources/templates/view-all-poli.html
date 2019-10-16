@@ -39,8 +39,8 @@
                                 <td><a th:href="@{/poli/dokter/} + ${poli.id}" th:text="${poli.nama}"></a></td>
                                 <td th:text="${poli.location}"></td>
                                 <td>
-                                    <a class="btn btn-success" href="#" role="button">ubah</a>
-                                    <a class="btn btn-danger" href="#" role="button">hapus</a>
+                                    <a class="btn btn-success" th:href="@{/poli/update/} + ${poli.id}" role="button">ubah</a>
+                                    <a class="btn btn-danger" th:href="@{/poli/delete/} + ${poli.id}" role="button">hapus</a>
                                 </td>
                             </tr>
                         </tbody>

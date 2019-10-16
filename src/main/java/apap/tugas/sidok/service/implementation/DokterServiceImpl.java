@@ -24,7 +24,8 @@ public class DokterServiceImpl implements DokterService {
         map.put("nik", dokter.getNik());
         map.put("tempatLahir", dokter.getTempatLahir());
         map.put("tanggalLahir", dokter.toStringTanggalLahir());
-        map.put("jenisKelamin", dokter.toStringJenisKelamin());
+        map.put("jenisKelamin", dokter.toStringJenisKelamin());        
+        map.put("listSpesialisasiDokter", dokter.toStringListSpesialisasiDokter());
         return map;
     }
 
@@ -76,6 +77,8 @@ public class DokterServiceImpl implements DokterService {
         targetDokter.setTanggalLahir(dokter.getTanggalLahir());
         targetDokter.setNik(dokter.getNik());
         targetDokter.setJenisKelamin(dokter.getJenisKelamin());
+        targetDokter.setListSpesialisasiDokter(dokter.getListSpesialisasiDokter());
+        targetDokter.setListJadwalJaga(dokter.getListJadwalJaga());
         addDokter(targetDokter);
         return targetDokter;
     }
