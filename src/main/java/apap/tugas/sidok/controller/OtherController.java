@@ -61,6 +61,15 @@ public class OtherController {
         return "jadwal-jaga-dokter";
     }
 
+    @RequestMapping(value="/bonus", method = RequestMethod.GET)
+    public String bonusPage(Model model) {
+        List<Map> mappedSpesialisasiList = spesialisasiDokterService.getAllSpesialisasiCount(spesialisasiService.getAll());
+
+        model.addAttribute("spesialisasiList", mappedSpesialisasiList);
+
+        return "view-all-spesialisasi";
+    }
+
     @RequestMapping(value = "/jadwal/tambah/{nipDokter}", method = RequestMethod.POST)
     private String addDokterSubmit(
         @PathVariable String nipDokter,
