@@ -8,6 +8,7 @@ import apap.tugas.sidok.repository.SpesialisasiDokterDb;
 import apap.tugas.sidok.service.SpesialisasiDokterService;
 import apap.tugas.sidok.service.SpesialisasiService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,14 @@ public class SpesialisasiDokterServiceImpl implements SpesialisasiDokterService 
     @Override
     public List<SpesialisasiDokterModel> getBySpesialisasi(SpesialisasiModel spesialisasiModel) {
         return spesialisasiDokterDb.findBySpesialisasiModel(spesialisasiModel);
+    }
+
+    @Override
+    public List<DokterModel> getDokterBySpesialisasi(SpesialisasiModel spesialisasiModel) {
+        List<DokterModel> dokterList = new ArrayList<>();
+        for(SpesialisasiDokterModel spesialisasiDokter : getBySpesialisasi(spesialisasiModel)){
+            dokterList.add(spesialisasiDokter.getDokterModel());
+        }
+        return dokterList;
     }
 }

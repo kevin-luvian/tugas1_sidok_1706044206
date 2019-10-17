@@ -12,9 +12,9 @@
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
 
-    <div class="container-fluid py-5">
+    <div class="container-fluid py-4">
         <br/>
-        <div class="text-center">
+        <div class="text-center py-3">
             <h1>Sistem Informasi Dokter</h1>
         </div>
 
@@ -54,7 +54,9 @@
                     </table>
                 </div>
                 
-                <a class="btn btn-dark m-3 float-right" th:href="@{/dokter/tambah}" role="button">Tambah Dokter</a>
+                <div class="px-3">
+                    <a class="btn btn-dark m-3 float-right" th:href="@{/dokter/tambah}" role="button">Tambah Dokter</a>
+                </div>
             </div>
         </div>
     </div>

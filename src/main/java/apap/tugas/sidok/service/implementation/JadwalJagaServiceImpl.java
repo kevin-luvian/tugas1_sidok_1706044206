@@ -8,6 +8,8 @@ import apap.tugas.sidok.service.JadwalJagaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,5 +41,14 @@ public class JadwalJagaServiceImpl implements JadwalJagaService {
     @Override
     public List<JadwalJagaModel> getByPoli(PoliModel poli) {
         return jadwalJagaDb.findByPoliModel(poli);
+    }
+
+    @Override
+    public List<DokterModel> getDokterByPoli(PoliModel poli) {
+        List<DokterModel> dokterList = new ArrayList<>();
+        for(JadwalJagaModel jadwalJaga : getByPoli(poli)){
+            dokterList.add(jadwalJaga.getDokterModel());
+        }
+        return dokterList;
     }
 }

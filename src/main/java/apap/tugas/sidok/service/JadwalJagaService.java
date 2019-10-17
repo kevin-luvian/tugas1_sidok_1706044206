@@ -12,4 +12,5 @@ public interface JadwalJagaService {
     List<JadwalJagaModel> getListJadwalJaga();
     List<JadwalJagaModel> getByDokter(DokterModel dokter);
     List<JadwalJagaModel> getByPoli(PoliModel poli);
+    List<DokterModel> getDokterByPoli(PoliModel poli);
 }

@@ -11,5 +11,6 @@ public interface SpesialisasiDokterService {
     void deleteSpesialisasiDokter(SpesialisasiDokterModel spesialisasiDokterModel);
     void createSpesialisasiDokter(DokterModel dokter, SpesialisasiModel spesialisasi);
     List<SpesialisasiDokterModel> getBySpesialisasi(SpesialisasiModel spesialisasiModel);
+    List<DokterModel> getDokterBySpesialisasi(SpesialisasiModel spesialisasiModel);
     List<SpesialisasiDokterModel> getByDokter(DokterModel dokterModel);
 }

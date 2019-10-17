@@ -6,6 +6,8 @@ import apap.tugas.sidok.service.DokterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +29,16 @@ public class DokterServiceImpl implements DokterService {
         map.put("jenisKelamin", dokter.toStringJenisKelamin());        
         map.put("listSpesialisasiDokter", dokter.toStringListSpesialisasiDokter());
         return map;
+    }
+
+    public static List<Map> compareDokterList(List<DokterModel> aList, List<DokterModel> bList){
+        List<Map> dokterList = new ArrayList<>();
+        for (DokterModel dokter : aList) {
+            if (bList.contains(dokter)) {
+                dokterList.add(parseDokterModel(dokter));
+            }
+        }
+        return dokterList;
     }
 
     @Override

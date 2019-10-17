@@ -8,6 +8,8 @@ import apap.tugas.sidok.model.connector.SpesialisasiDokterModel;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -82,12 +84,21 @@ public class OtherController {
             Model model ) {
         //mengambil obj berdasarkan id
         SpesialisasiModel spesialisasi = spesialisasiService.getSpesialisasiById(Long.valueOf(idSpesialisasi));
-        List<SpesialisasiDokterModel> spesialisasiList = spesialisasiDokterService.getBySpesialisasi(spesialisasi);
+        List<DokterModel> spesialisasiDokterListDokter = spesialisasiDokterService.getDokterBySpesialisasi(spesialisasi);
+
         //add obj utk di render
         PoliModel poli = poliService.getPoliById(Long.valueOf(idPoli));
-        List<JadwalJagaModel> jadwalJagaList = jadwalJagaService.getByPoli(poli);
-        //return template
+        List<DokterModel> jadwalJagaListDokter = jadwalJagaService.getDokterByPoli(poli);
+
+        List<Map> dokterList = DokterServiceImpl.compareDokterList(spesialisasiDokterListDokter, jadwalJagaListDokter);
+
+        List<SpesialisasiModel> spesialisasiList = spesialisasiService.getAll();
+        List<PoliModel> poliList = poliService.getAll();
+
+        model.addAttribute("spesialisasiList", spesialisasiList);
+        model.addAttribute("poliList", poliList);
+        model.addAttribute("dokterList", dokterList);
         
-        return "view-dokter";
+        return "view-dokter-by-spesialisasi-poli";
     }
 }

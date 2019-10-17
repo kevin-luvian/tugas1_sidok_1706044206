@@ -5,6 +5,7 @@ import apap.tugas.sidok.repository.PoliDb;
 import apap.tugas.sidok.service.PoliService;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,9 @@ public class PoliServiceImpl implements PoliService {
 
     @Override
     public PoliModel getPoliById(Long poliId) {
-        return poliDb.findById(poliId).get();
+        Optional<PoliModel> o = poliDb.findById(poliId);
+        if(o.isPresent()) return o.get();
+        return null;
     }
 
     @Override
