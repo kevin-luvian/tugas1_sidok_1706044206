@@ -10,7 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.*;
 
 @Service
 @Transactional
@@ -50,5 +53,30 @@ public class JadwalJagaServiceImpl implements JadwalJagaService {
             dokterList.add(jadwalJaga.getDokterModel());
         }
         return dokterList;
+    }
+
+    @Override
+    public DokterModel getMostDokterByPoli(PoliModel poli) {
+        List<DokterModel> dokterList = getDokterByPoli(poli);
+
+        DokterModel maxKey = null;
+        int maxCounts = 0;
+        
+        HashMap<DokterModel, Integer> map = new HashMap<>();
+        
+        for(DokterModel dokter: dokterList){
+            System.out.println(dokter.getNama());
+            if (map.containsKey(dokter)) {
+                map.put(dokter, map.get(dokter)+1);
+            } else {
+                map.put(dokter, 1);
+            }
+            if(map.get(dokter) > maxCounts){
+                maxCounts = map.get(dokter);
+                maxKey = dokter;
+            }
+        }
+
+        return maxKey;
     }
 }

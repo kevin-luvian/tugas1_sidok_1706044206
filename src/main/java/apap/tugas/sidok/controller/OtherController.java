@@ -1,11 +1,6 @@
 package apap.tugas.sidok.controller;
 
-import apap.tugas.sidok.model.base.DokterModel;
-import apap.tugas.sidok.model.base.PoliModel;
-import apap.tugas.sidok.model.base.SpesialisasiModel;
-import apap.tugas.sidok.model.connector.JadwalJagaModel;
-import apap.tugas.sidok.model.connector.SpesialisasiDokterModel;
-
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -16,14 +11,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import apap.tugas.sidok.model.base.DokterModel;
+import apap.tugas.sidok.model.base.PoliModel;
+import apap.tugas.sidok.model.base.SpesialisasiModel;
+import apap.tugas.sidok.model.connector.JadwalJagaModel;
+import apap.tugas.sidok.model.connector.SpesialisasiDokterModel;
 import apap.tugas.sidok.service.DokterService;
 import apap.tugas.sidok.service.JadwalJagaService;
 import apap.tugas.sidok.service.PoliService;
 import apap.tugas.sidok.service.SpesialisasiDokterService;
 import apap.tugas.sidok.service.SpesialisasiService;
 import apap.tugas.sidok.service.implementation.DokterServiceImpl;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class OtherController {
@@ -78,7 +79,7 @@ public class OtherController {
     }
 
     @RequestMapping(value="/cari", method=RequestMethod.GET)
-    public String viewByNIK(
+    public String viewBySpesialisasiPoli(
             @RequestParam(value = "idSpesialisasi") String idSpesialisasi,
             @RequestParam(value = "idPoli") String idPoli,
             Model model ) {
@@ -101,4 +102,23 @@ public class OtherController {
         
         return "view-dokter-by-spesialisasi-poli";
     }
+
+    @RequestMapping(value="/cari2", params = "idPoli", method=RequestMethod.GET)
+    public String viewMostByPoli(
+        @RequestParam(value = "idPoli") String idPoli,
+        Model model ) {
+            PoliModel poli = poliService.getPoliById(Long.valueOf(idPoli));
+
+            DokterModel dokter = jadwalJagaService.getMostDokterByPoli(poli);
+            
+            List<PoliModel> poliList = poliService.getAll();
+
+            List<SpesialisasiDokterModel> listSpesialisasiDokter = new ArrayList<>();
+            if(dokter != null) listSpesialisasiDokter = dokter.getListSpesialisasiDokter();
+
+            model.addAttribute("poliList", poliList);
+            model.addAttribute("dokter", DokterServiceImpl.parseDokterModel(dokter));
+            model.addAttribute("listSpesialisasiDokter", listSpesialisasiDokter);
+            return "view-most-dokter-by-poli";
+        }
 }
