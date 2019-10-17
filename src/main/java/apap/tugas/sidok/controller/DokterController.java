@@ -1,8 +1,8 @@
 package apap.tugas.sidok.controller;
 
-import apap.tugas.sidok.model.base.DokterModel;
-import apap.tugas.sidok.model.base.SpesialisasiModel;
-import apap.tugas.sidok.model.connector.SpesialisasiDokterModel;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,17 +11,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import apap.tugas.sidok.model.base.DokterModel;
+import apap.tugas.sidok.model.base.SpesialisasiModel;
+import apap.tugas.sidok.model.connector.SpesialisasiDokterModel;
 import apap.tugas.sidok.service.DokterService;
 import apap.tugas.sidok.service.SpesialisasiDokterService;
 import apap.tugas.sidok.service.SpesialisasiService;
 import apap.tugas.sidok.service.implementation.DokterServiceImpl;
-
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class DokterController {
@@ -70,6 +69,10 @@ public class DokterController {
         @ModelAttribute DokterModel dokter,
         Model model
     ) {
+        if(dokterService.getDokterByNIK(dokter.getNik()) != null){
+            model.addAttribute("nik", dokter.getNik());
+            return "error-dokter-nik";
+        }
         List<SpesialisasiDokterModel> spesialisasiDokterList = dokter.getListSpesialisasiDokter();
         dokter.setListSpesialisasiDokter(null);
         dokterService.addDokter(dokter);

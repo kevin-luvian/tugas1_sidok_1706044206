@@ -57,6 +57,7 @@ public class DokterModel {
 
     public String toStringListSpesialisasiDokter(){
         String output = "";
+        if(getListSpesialisasiDokter() == null) return output;
         for(SpesialisasiDokterModel sdm : getListSpesialisasiDokter()){
             output += sdm.getSpesialisasiModel().getNama();
             output += "; ";
