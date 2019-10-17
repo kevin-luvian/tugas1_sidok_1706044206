@@ -11,6 +11,7 @@
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
     <h2 th:text="'Gagal menambahkan, dokter dengan NIK '+ ${nik} +' sudah ada pada database'"></h2>
+    <a class="nav-item nav-link active" th:href="@{/}">Kembali ke Home</a>
 </body>
 
 </html>
