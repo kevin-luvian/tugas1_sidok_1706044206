@@ -52,7 +52,7 @@
                 <label>Spesialisasi</label>
                 <div th:field="*{listSpesialisasiDokter}" th:each="spesialisasiDokterModel, iterationStatus : *{listSpesialisasiDokter}">
                     <select class="form-control" th:field="*{listSpesialisasiDokter[__${iterationStatus.index}__].spesialisasiModel}">
-                        <option disabled selected value="">-- Pilih Spesialisasi --</option>
+                        <option selected value=0>-- Pilih Spesialisasi --</option>
                         <option 
                             th:each="spesialisasi : ${spesialisasiList}" 
                             th:value="${spesialisasi.id}" 
