@@ -89,8 +89,8 @@ public class OtherController {
 
     @RequestMapping(value="/cari", params="idSpesialisasi", method=RequestMethod.GET)
     public String viewBySpesialisasiPoli(
-            @RequestParam(value = "idSpesialisasi") String idSpesialisasi,
-            @RequestParam(value = "idPoli") String idPoli,
+            @RequestParam(value = "idSpesialisasi") Long idSpesialisasi,
+            @RequestParam(value = "idPoli") Long idPoli,
             Model model ) {
         //mengambil obj berdasarkan id
         SpesialisasiModel spesialisasi = spesialisasiService.getSpesialisasiById(Long.valueOf(idSpesialisasi));

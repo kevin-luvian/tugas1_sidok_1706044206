@@ -11,7 +11,7 @@
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
     <h2 th:text="'Dokter ' + ${dokter.nama} + ' dengan NIP '+ ${dokter.nip} +' berhasil ditambahkan'"></h2>
-    <a class="nav-item nav-link active" th:href="@{/}">Kembali ke Home</a>
+    <a th:href="@{/}">Kembali ke Home</a>
 </body>
 
 </html>

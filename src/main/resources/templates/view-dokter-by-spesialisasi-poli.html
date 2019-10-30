@@ -27,7 +27,7 @@
                                 </div>
                                 <div class="col-9">                                        
                                     <select class="form-control" name="idSpesialisasi">
-                                        <option selected th:value="${0}">-- Pilih Spesialisasi --</option>
+                                        <option selected th:value="0">-- Pilih Spesialisasi --</option>
                                         <div th:each="sp, iter : ${spesialisasiList}">
                                             <option th:value="${sp.id}" th:text="${sp.nama}"></option>
                                         </div>

@@ -55,10 +55,12 @@ public class PoliController {
     ) {
         PoliModel poli = poliService.getPoliById(idPoli);
         List<JadwalJagaModel> jadwalJagaPoli = jadwalJagaService.getByPoli(poli);
+
         List<Map> dokterModels = new ArrayList<>();
         for(JadwalJagaModel i : jadwalJagaPoli){
             dokterModels.add(DokterServiceImpl.parseDokterModel(i.getDokterModel()));
         }
+        
         model.addAttribute("dokterModels", dokterModels);
         return "view-dokter-by-poli";
     }
