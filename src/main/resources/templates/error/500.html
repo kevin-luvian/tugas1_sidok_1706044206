@@ -5,12 +5,23 @@
     <meta charset="UTF-8">
     <title>Home</title>
 
-    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<link type="text/css" rel="stylesheet" th:href="@{/css/style.css}" />
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
-    <h2>Maaf halaman tidak dapat diakses</h2>
+	<div id="notfound">
+		<div class="notfound">
+			<div class="notfound-404">
+				<h3>Oops! An Error Occured</h3>
+				<h1><span>5</span><span>0</span><span>0</span></h1>
+			</div>
+			<h2>we are sorry, the page you requested is having a breakdown</h2>
+		</div>
+	</div>
+
 </body>
+
 </html>

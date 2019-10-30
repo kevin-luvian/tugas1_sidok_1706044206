@@ -78,6 +78,7 @@ public class DokterModel {
     public String toStringTanggalLahir() {
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Jakarta"));
         cal.setTime(getTanggalLahir());
+        
         String year = String.format("%04d", cal.get(Calendar.YEAR));
         String month = String.format("%02d", cal.get(Calendar.MONTH)+1);
         String day = String.format("%02d",cal.get(Calendar.DAY_OF_MONTH));
@@ -97,7 +98,9 @@ public class DokterModel {
 
     private String getStringTanggalLahir(){
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Jakarta"));
+
         cal.setTime(getTanggalLahir());
+
         String year = String.format("%02d", cal.get(Calendar.YEAR)%100);
         String month = String.format("%02d", cal.get(Calendar.MONTH)+1);
         String day = String.format("%02d",cal.get(Calendar.DAY_OF_MONTH));

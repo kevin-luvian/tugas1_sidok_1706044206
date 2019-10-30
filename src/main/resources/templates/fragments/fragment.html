@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <head th:fragment="css">
-        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
 
     <!-- jquery, ajax, and bootstrap-->
@@ -34,7 +34,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" th:href="@{/cari/?idSpesialisasi=0} + @{&idPoli=0}">Cari Dokter Spesialis pada Poli</a>
-                        <a class="dropdown-item" th:href="@{/cari2/?idPoli=0}">Cari Dokter Terbanyak pada Poli</a>
+                        <a class="dropdown-item" th:href="@{/cari/?idPoli=0}">Cari Dokter Terbanyak pada Poli</a>
                     </div>
                 </div>
                 <a class="nav-item nav-link active" th:href="@{/bonus}">Bonus <span class="sr-only">{current}</span></a>

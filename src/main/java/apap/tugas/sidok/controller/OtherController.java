@@ -87,7 +87,7 @@ public class OtherController {
         return "add-jadwal-jaga";
     }
 
-    @RequestMapping(value="/cari", method=RequestMethod.GET)
+    @RequestMapping(value="/cari", params="idSpesialisasi", method=RequestMethod.GET)
     public String viewBySpesialisasiPoli(
             @RequestParam(value = "idSpesialisasi") String idSpesialisasi,
             @RequestParam(value = "idPoli") String idPoli,
@@ -96,7 +96,6 @@ public class OtherController {
         SpesialisasiModel spesialisasi = spesialisasiService.getSpesialisasiById(Long.valueOf(idSpesialisasi));
         List<DokterModel> spesialisasiDokterListDokter = spesialisasiDokterService.getDokterBySpesialisasi(spesialisasi);
 
-        //add obj utk di render
         PoliModel poli = poliService.getPoliById(Long.valueOf(idPoli));
         List<DokterModel> jadwalJagaListDokter = jadwalJagaService.getDokterByPoli(poli);
 
@@ -112,7 +111,7 @@ public class OtherController {
         return "view-dokter-by-spesialisasi-poli";
     }
 
-    @RequestMapping(value="/cari2", params = "idPoli", method=RequestMethod.GET)
+    @RequestMapping(value="/cari", method=RequestMethod.GET)
     public String viewMostByPoli(
         @RequestParam(value = "idPoli") String idPoli,
         Model model ) {
