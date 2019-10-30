@@ -45,10 +45,9 @@ public class DokterServiceImpl implements DokterService {
 
     public static List<Map> compareDokterList(List<DokterModel> aList, List<DokterModel> bList){
         List<Map> dokterList = new ArrayList<>();
-        for (DokterModel dokter : aList) {
-            if (bList.contains(dokter)) {
-                dokterList.add(parseDokterModel(dokter));
-            }
+        aList.retainAll(bList);
+        for(DokterModel dokter: aList){
+            dokterList.add(parseDokterModel(dokter));
         }
         return dokterList;
     }
