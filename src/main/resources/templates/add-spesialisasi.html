@@ -10,8 +10,16 @@
 
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
-    <h2 th:text="'Spesialisasi ' + ${spesialisasi.nama} + ' berhasil ditambahkan'"></h2>
-    <a class="nav-item nav-link active" th:href="@{/}">Kembali ke Home</a>
+
+    <div class="container col-7 py-5">
+        <div class="card text-center">
+            <div class="card-body">
+                <h4 class="card-text" th:text="'Spesialisasi ' + ${spesialisasi.nama} + ' berhasil ditambahkan'"></h4>
+                <a class="btn btn-dark mt-3" th:href="@{/}"><i class="	fa fa-home"></i> Home</a>
+            </div>
+        </div>
+    </div>
+    
 </body>
 
 </html>

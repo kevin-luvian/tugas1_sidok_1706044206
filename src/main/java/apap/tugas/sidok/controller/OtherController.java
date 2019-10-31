@@ -83,8 +83,17 @@ public class OtherController {
         poli.addJadwalJaga(jadwalJaga);
 
         jadwalJagaService.addJadwalJaga(jadwalJaga);
+
+        List<String> hariList = Arrays.asList(new String[]{"Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"});
+        List<JadwalJagaModel> jadwalJagaList = jadwalJagaService.getByDokter(dokter);
+
+        model.addAttribute("dokter", DokterServiceImpl.parseDokterModel(dokter));
         model.addAttribute("jadwalJaga", jadwalJaga);
-        return "add-jadwal-jaga";
+        model.addAttribute("jadwalJagaList", jadwalJagaList);
+        model.addAttribute("poliList", poliService.getAll());
+        model.addAttribute("hariList", hariList);
+
+        return "jadwal-jaga-dokter";
     }
 
     @RequestMapping(value="/cari", params="idSpesialisasi", method=RequestMethod.GET)

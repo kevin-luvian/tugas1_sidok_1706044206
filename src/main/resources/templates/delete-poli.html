@@ -10,8 +10,16 @@
 
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
-    <h2 th:text="${poli.nama} + ' pada lokasi '+ ${poli.location} +' berhasil dihapus'"></h2>
-    <a class="nav-item nav-link active" th:href="@{/}">Kembali ke Home</a>
+
+    <div class="container col-7 py-5">
+        <div class="card text-center">
+            <div class="card-body">
+                <h4 class="card-text" th:text="${poli.nama} + ' pada lokasi '+ ${poli.location} +' berhasil dihapus'"></h4>
+                <a class="btn btn-dark mt-3" th:href="@{/poli}"><i class="	fas fa-caret-left"></i> Back</a>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>

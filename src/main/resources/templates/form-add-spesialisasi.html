@@ -11,19 +11,21 @@
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
     
-    <h2>Hello!</h2>
-    <h3>Tambah Store</h3>
+    <div class="pb-5">
+        <h2>Hello!</h2>
+        <h3>Tambah Store</h3>
 
-    <form th:action="@{/spesialisasi/tambah}" th:object="${spesialisasi}" method="POST">
-        Nama: <br>
-        <input type="text" name="nama"/>
-        <br>
+        <form th:action="@{/spesialisasi/tambah}" th:object="${spesialisasi}" method="POST">
+            Nama: <br>
+            <input type="text" name="nama"/>
+            <br>
 
-        Gelar: <br>
-        <input type="text" name="gelar"/>
-        <br>
+            Gelar: <br>
+            <input type="text" name="gelar"/>
+            <br>
 
-        <button type="submit">Submit</button>
-    </form>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </body>
 </html>

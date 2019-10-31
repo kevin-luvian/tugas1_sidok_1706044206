@@ -12,7 +12,7 @@
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
 
-    <div class="container-fluid">
+    <div class="container-fluid pb-5">
         <br/>
         <div class="container text-center">
             <h1>Tambah Jadwal Jaga Poli Seorang Dokter</h1>
@@ -94,11 +94,6 @@
                                 <th scope="row" th:text="${iter.index}+1"></th>
                                 <td th:text="${jadwalJagaElem.poliModel.nama}"></td>
                                 <td th:text="${jadwalJagaElem.day}"></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" ></th>
-                                <td><a href="#" ></a></td>
-                                <td></td>
                             </tr>
                         </tbody>
                     </table>
