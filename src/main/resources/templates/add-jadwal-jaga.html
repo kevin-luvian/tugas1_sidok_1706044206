@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymleaf.org">
+
+<head>
+    <title>Add Dokter</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+
+    <div class="container col-7 py-5">
+        <div class="card text-center">
+            <div class="card-body">
+                <h4 class="card-text" th:text="'Berhasil menambahkan jadwal jaga untuk Dokter' + ${jadwalJaga.dokterModel.nama} + ' di ' + ${jadwalJaga.poliModel.nama} + ' pada hari ' + ${jadwalJaga.day}"></h4>
+                <a class="btn btn-dark mt-3" th:href="@{/jadwal/tambah/} + ${jadwalJaga.dokterModel.nip}"><i class="	fas fa-caret-left"></i> Back</a>
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+</html>

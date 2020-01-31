@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymlaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Poli</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+
+    <div class="container pb-5">
+        <br/>
+        <h3>Tambah Poli</h3>
+        <br/>
+
+        <form th:action="@{/poli/tambah}" th:object="${poli}" method="POST">
+            <div class="form-group">
+                <label>Nama</label>
+                <input type="text" class="form-control" placeholder="Nama Poli" name="nama">
+            </div>
+
+            <div class="form-group">
+                <label>Lokasi</label>
+                <input type="text" class="form-control" placeholder="Location" name="location">
+            </div>
+
+            <button class="btn btn-dark" type="submit">Submit</button>
+        </form>
+    </div>
+
+</body>
+</html>

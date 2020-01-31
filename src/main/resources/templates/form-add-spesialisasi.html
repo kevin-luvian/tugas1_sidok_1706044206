@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymlaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Store</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    
+    <div class="pb-5">
+        <h2>Hello!</h2>
+        <h3>Tambah Store</h3>
+
+        <form th:action="@{/spesialisasi/tambah}" th:object="${spesialisasi}" method="POST">
+            Nama: <br>
+            <input type="text" name="nama"/>
+            <br>
+
+            Gelar: <br>
+            <input type="text" name="gelar"/>
+            <br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

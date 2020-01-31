@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Dokter</title>
+    
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    
+</head>
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+
+    <br/>
+
+    <div class="container container-fluid pb-5">
+        <div class="container text-center">
+            <h1>Cari Dokter Yang Bekerja Paling Banyak Pada Suatu Poli</h1>
+            <br/>
+            
+            <form>
+                
+                <div class="container col-7">
+
+                    <div class="form-group">
+                        <div class="row my-2">
+                            <div class="col-3 text-left">
+                                <h4>Poli</h4>
+                            </div>
+                            <div class="col-9">                                        
+                                <select class="form-control" name="idPoli">
+                                    <option selected value="0">-- Pilih Poli --</option>
+                                    <div th:each="pl, iter : ${poliList}">
+                                        <option th:value="${pl.id}" th:text="${pl.nama}"></option>
+                                    </div>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container px-3">
+                        <button class="btn btn-dark" type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="card my-4">
+            <div class="card-header text-white bg-dark">
+                Detail Dokter
+            </div>
+            <div class="card-body">
+                <p><b>Nama: </b><span th:text="${dokter.nama}"></span></p>
+                <p><b>NIP: </b><span th:text="${dokter.nip}"></span></p>
+                <p><b>NIK: </b><span th:text="${dokter.nik}"></span></p>
+                <p><b>Tempat Lahir: </b><span th:text="${dokter.tempatLahir}"></span></p>
+                <p><b>Tanggal Lahir: </b><span th:text="${dokter.tanggalLahir}"></span></p>
+                <p><b>Jenis Kelamin: </b><span th:text="${dokter.jenisKelamin}"></span></p>
+                <p><b>Spesialisasi :</b></p>
+                <ul th:each="spesialisasiDokter, iter : ${listSpesialisasiDokter}">
+                    <li th:text="${spesialisasiDokter.spesialisasiModel.nama}"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

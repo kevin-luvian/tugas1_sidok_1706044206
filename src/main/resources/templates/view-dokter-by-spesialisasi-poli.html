@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Jadwal Jaga</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+
+    <div class="container-fluid pb-5">
+        <br/>
+        <div class="container text-center">
+            <h1>Cari Dokter Berdasarkan Spesialisasi dan Poli Tertentu</h1>
+            <br/>
+            
+            <form>
+                <div class="container col-7">
+                        <div class="form-group">
+                            <div class="row my-2">
+                                <div class="col-3 text-left">
+                                    <h4>Spesialisasi</h4>
+                                </div>
+                                <div class="col-9">                                        
+                                    <select class="form-control" name="idSpesialisasi">
+                                        <option selected th:value="0">-- Pilih Spesialisasi --</option>
+                                        <div th:each="sp, iter : ${spesialisasiList}">
+                                            <option th:value="${sp.id}" th:text="${sp.nama}"></option>
+                                        </div>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    <div class="form-group">
+                        <div class="row my-2">
+                            <div class="col-3 text-left">
+                                <h4>Poli</h4>
+                            </div>
+                            <div class="col-9">                                        
+                                <select class="form-control" name="idPoli">
+                                    <option selected value="0">-- Pilih Poli --</option>
+                                    <div th:each="pl, iter : ${poliList}">
+                                        <option th:value="${pl.id}" th:text="${pl.nama}"></option>
+                                    </div>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container px-3">
+                        <button class="btn btn-dark" type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <br/>
+
+        <div class="container">
+            <div class="card">
+                <div class="card-header text-white bg-dark">
+                    Daftar Dokter
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Nama</th>
+                                <th scope="col">NIP</th>
+                                <th scope="col">NIK</th>
+                                <th scope="col">Jenis Kelamin</th>
+                                <th scope="col">Spesialisasi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="dokter, iter : ${dokterList}">
+                                <th scope="row" th:text="${iter.index}+1"></th>
+                                <td><a th:href="@{/dokter/?nikDokter=} + ${dokter.nik}" th:text="${dokter.nama}"></a></td>
+                                <td th:text="${dokter.nip}"></td>
+                                <td th:text="${dokter.nik}"></td>
+                                <td th:text="${dokter.jenisKelamin}"></td>
+                                <td th:text="${dokter.listSpesialisasiDokter}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

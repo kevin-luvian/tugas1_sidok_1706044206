@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymleaf.org">
+
+<head>
+    <title>Add Store</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+
+    <div class="container col-7 py-5">
+        <div class="card text-center">
+            <div class="card-body">
+                <h4 class="card-text" th:text="'Spesialisasi ' + ${spesialisasi.nama} + ' berhasil ditambahkan'"></h4>
+                <a class="btn btn-dark mt-3" th:href="@{/}"><i class="	fa fa-home"></i> Home</a>
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+</html>

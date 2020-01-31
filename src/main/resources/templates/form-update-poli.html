@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymlaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Poli</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+
+    <div class="container pb-5">
+        <br/>
+        <h3>Update Poli</h3>
+        <br/>
+
+        <form th:action="@{/poli/update/{poliId}(poliId=${poli.id})}" th:object="${poli}" method="POST">
+            <div class="form-group">
+                <label>Nama</label>
+                <input type="text" class="form-control" th:field="${poli.nama}" th:placeholder="${poli.nama}" name="nama">
+            </div>
+
+            <div class="form-group">
+                <label>Location</label>
+                <input type="text" class="form-control" th:field="${poli.location}" th:placeholder="${poli.location}" name="location">
+            </div>
+
+            <button class="btn btn-dark" type="submit">Submit</button>
+        </form>
+    </div>
+
+</body>
+</html>

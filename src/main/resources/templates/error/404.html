@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<link type="text/css" rel="stylesheet" th:href="@{/css/style-error.css}" />
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+	<div id="notfound">
+		<div class="notfound">
+			<div class="notfound-404">
+				<h3>Oops! Page not found</h3>
+				<h1><span>4</span><span>0</span><span>4</span></h1>
+			</div>
+			<h2>we are sorry, but the page you requested was not found</h2>
+		</div>
+	</div>
+
+</body>
+</html>
